@@ -1,0 +1,6 @@
+## Interface: 30300
+## Title: TrinketICD
+## Author: Oldsalt (Smolderforge)
+## Notes: internal cooldown frames
+## SavedVariablesPerCharacter: trinketFrameScale, trinket1Table, trinket2Table
+TrinketICD.lua
