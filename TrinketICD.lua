@@ -183,7 +183,7 @@ TrinketSaveButton:SetHeight(20)
 -- Save Text
 local TrinketSaveFont = TrinketSettingsFrame:CreateFontString("TrinketSaveFont", "ARTWORK", "GameFontNormal")
 TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -373)
-TrinketSaveFont:SetTextHeight("15")
+TrinketSaveFont:SetFont("Fonts\\FRIZQT__.TTF", 15)
 TrinketSaveFont:SetJustifyH("LEFT")
 TrinketSaveFont:SetText("|cff349d34Save")
 
@@ -220,7 +220,7 @@ Trinket1TitleButton:SetHeight(30)
 -- Title
 local Trinket1TitleFont = TrinketSettingsFrame:CreateFontString("Trinket1TitleFont", "ARTWORK", "GameFontNormal")
 Trinket1TitleFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 43, -15)
-Trinket1TitleFont:SetTextHeight("20")
+Trinket1TitleFont:SetFont("Fonts\\FRIZQT__.TTF", 20)
 Trinket1TitleFont:SetJustifyH("LEFT")
 Trinket1TitleFont:SetText("Trinket 1:")
 
@@ -240,7 +240,7 @@ end)
 -- Icon Text
 local Trinket1IconFont = TrinketSettingsFrame:CreateFontString("Trinket1IconFont", "ARTWORK", "GameFontNormal")
 Trinket1IconFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -45)
-Trinket1IconFont:SetTextHeight("12")
+Trinket1IconFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket1IconFont:SetJustifyH("LEFT")
 Trinket1IconFont:SetText("Icon\nname:")
 
@@ -260,7 +260,7 @@ end)
 -- ICD Text
 local Trinket1ICDFont = TrinketSettingsFrame:CreateFontString("Trinket1ICDFont", "ARTWORK", "GameFontNormal")
 Trinket1ICDFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -80)
-Trinket1ICDFont:SetTextHeight("12")
+Trinket1ICDFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket1ICDFont:SetJustifyH("LEFT")
 Trinket1ICDFont:SetText("ICD (value in s.):")
 
@@ -276,7 +276,7 @@ Trinket1ICDValue:SetMaxLetters(3)
 -- Aura(s) Text
 local Trinket1AuraFont = TrinketSettingsFrame:CreateFontString("Trinket1AuraFont", "ARTWORK", "GameFontNormal")
 Trinket1AuraFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -112)
-Trinket1AuraFont:SetTextHeight("12")
+Trinket1AuraFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket1AuraFont:SetJustifyH("LEFT")
 Trinket1AuraFont:SetText("Aura(s):")
 
@@ -324,7 +324,7 @@ Trinket1HeroicMarkButton:SetHitRectInsets(0, -90, 0, 0)
 -- Heroic Mark Text
 local Trinket1HeroicMarkFont = TrinketSettingsFrame:CreateFontString("Trinket1HeroicMarkFont", "ARTWORK", "GameFontNormal")
 Trinket1HeroicMarkFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -151)
-Trinket1HeroicMarkFont:SetTextHeight("12")
+Trinket1HeroicMarkFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket1HeroicMarkFont:SetJustifyH("LEFT")
 Trinket1HeroicMarkFont:SetText("Heroic trinket")
 
@@ -352,7 +352,7 @@ Trinket2TitleButton:SetHeight(30)
 -- Title
 local Trinket2TitleFont = TrinketSettingsFrame:CreateFontString("Trinket2TitleFont", "ARTWORK", "GameFontNormal")
 Trinket2TitleFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 43, -195)
-Trinket2TitleFont:SetTextHeight("20")
+Trinket2TitleFont:SetFont("Fonts\\FRIZQT__.TTF", 20)
 Trinket2TitleFont:SetJustifyH("LEFT")
 Trinket2TitleFont:SetText("Trinket 2:")
 
@@ -376,7 +376,7 @@ end)
 -- Icon Text
 local Trinket2IconFont = TrinketSettingsFrame:CreateFontString("Trinket2IconFont", "ARTWORK", "GameFontNormal")
 Trinket2IconFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -225)
-Trinket2IconFont:SetTextHeight("12")
+Trinket2IconFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket2IconFont:SetJustifyH("LEFT")
 Trinket2IconFont:SetText("Icon\nname:")
 
@@ -396,7 +396,7 @@ end)
 -- ICD Text
 local Trinket2ICDFont = TrinketSettingsFrame:CreateFontString("Trinket2ICDFont", "ARTWORK", "GameFontNormal")
 Trinket2ICDFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -260)
-Trinket2ICDFont:SetTextHeight("12")
+Trinket2ICDFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket2ICDFont:SetJustifyH("LEFT")
 Trinket2ICDFont:SetText("ICD (value in s.):")
 
@@ -412,7 +412,7 @@ Trinket2ICDValue:SetMaxLetters(3)
 -- Aura(s) Text
 local Trinket2AuraFont = TrinketSettingsFrame:CreateFontString("Trinket2AuraFont", "ARTWORK", "GameFontNormal")
 Trinket2AuraFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -292)
-Trinket2AuraFont:SetTextHeight("12")
+Trinket2AuraFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket2AuraFont:SetJustifyH("LEFT")
 Trinket2AuraFont:SetText("Aura(s):")
 
@@ -460,7 +460,7 @@ Trinket2HeroicMarkButton:SetHitRectInsets(0, -90, 0, 0)
 -- Heroic Mark Text
 local Trinket2HeroicMarkFont = TrinketSettingsFrame:CreateFontString("Trinket2HeroicMarkFont", "ARTWORK", "GameFontNormal")
 Trinket2HeroicMarkFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -331)
-Trinket2HeroicMarkFont:SetTextHeight("12")
+Trinket2HeroicMarkFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
 Trinket2HeroicMarkFont:SetJustifyH("LEFT")
 Trinket2HeroicMarkFont:SetText("Heroic trinket")
 
