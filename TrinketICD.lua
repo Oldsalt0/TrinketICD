@@ -160,7 +160,7 @@ local TrinketSettingsFrame = CreateFrame("Frame", "TrinketSettingsFrame", UIPare
 TrinketSettingsFrame:SetPoint("CENTER")
 TrinketSettingsFrame:SetClampedToScreen(true)
 TrinketSettingsFrame:SetWidth(180)
-TrinketSettingsFrame:SetHeight(400)
+TrinketSettingsFrame:SetHeight(440)
 TrinketSettingsFrame:SetBackdrop({
 	bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 	edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border",
@@ -174,15 +174,34 @@ TrinketSettingsFrame:CreateTitleRegion():SetAllPoints()
 TrinketSettingsFrame:SetUserPlaced(true)
 TrinketSettingsFrame:Hide()
 
+-- Debug Mode Check Button
+local DebugModeButton = CreateFrame("CheckButton", "DebugModeButton", TrinketSettingsFrame, "InterfaceOptionsCheckButtonTemplate")
+DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -375)
+DebugModeButton:SetHitRectInsets(0, -80, 0, 0)
+DebugModeButton:SetScript("OnEnter", function()
+	GameTooltip:SetOwner(DebugModeButton, "ANCHOR_TOPLEFT", 0, -5)
+	GameTooltip:SetText("Prints buffs with their icon name and ID on chat")
+	GameTooltip:Show()
+	GameTooltip:FadeOut()
+end)
+
+-- Heroic Mark Text
+local DebugModeFont = TrinketSettingsFrame:CreateFontString("DebugModeFont", "ARTWORK", "GameFontNormal")
+DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -381)
+DebugModeFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
+DebugModeFont:SetJustifyH("LEFT")
+DebugModeFont:SetTextColor(1, 0.2, 0)
+DebugModeFont:SetText("Debug mode")
+
 -- Save Button
 local TrinketSaveButton = CreateFrame("Button", "TrinketSaveButton", TrinketSettingsFrame)
-TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -370)
+TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -410)
 TrinketSaveButton:SetWidth(52)
 TrinketSaveButton:SetHeight(20)
 
 -- Save Text
 local TrinketSaveFont = TrinketSettingsFrame:CreateFontString("TrinketSaveFont", "ARTWORK", "GameFontNormal")
-TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -373)
+TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -413)
 TrinketSaveFont:SetFont("Fonts\\FRIZQT__.TTF", 15)
 TrinketSaveFont:SetJustifyH("LEFT")
 TrinketSaveFont:SetText("|cff349d34Save")
@@ -191,14 +210,22 @@ TrinketSaveFont:SetText("|cff349d34Save")
 TrinketSaveButton:SetScript("OnClick", function()
 	PlaySound("UChatScrollButton")
 	trinket1Table[2] = Trinket1IconName:GetText()
-	Trinket1Texture:SetTexture("Interface\\Icons\\"..Trinket1IconName:GetText())
+	if Trinket1IconName:GetText() ~= "" then
+		Trinket1Texture:SetTexture("Interface\\Icons\\"..Trinket1IconName:GetText())
+	else
+		Trinket1Texture:SetTexture("Interface\\Icons\\INV_Misc_QuestionMark")
+	end
 	trinket1Table[3] = Trinket1ICDValue:GetText()
 	trinket1Table[4] = Trinket1Aura1:GetText()
 	trinket1Table[5] = Trinket1Aura2:GetText()
 	trinket1Table[6] = Trinket1Aura3:GetText()
 	trinket1Table[7] = Trinket1Aura4:GetText()
 	trinket2Table[2] = Trinket2IconName:GetText()
-	Trinket2Texture:SetTexture("Interface\\Icons\\"..Trinket2IconName:GetText())
+	if Trinket2IconName:GetText() ~= "" then
+		Trinket2Texture:SetTexture("Interface\\Icons\\"..Trinket2IconName:GetText())
+	else
+		Trinket2Texture:SetTexture("Interface\\Icons\\INV_Misc_QuestionMark")
+	end
 	trinket2Table[3] = Trinket2ICDValue:GetText()
 	trinket2Table[4] = Trinket2Aura1:GetText()
 	trinket2Table[5] = Trinket2Aura2:GetText()
@@ -222,6 +249,7 @@ local Trinket1TitleFont = TrinketSettingsFrame:CreateFontString("Trinket1TitleFo
 Trinket1TitleFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 43, -15)
 Trinket1TitleFont:SetFont("Fonts\\FRIZQT__.TTF", 20)
 Trinket1TitleFont:SetJustifyH("LEFT")
+Trinket1TitleFont:SetTextColor(1, 1, 1)
 Trinket1TitleFont:SetText("Trinket 1:")
 
 -- Title Check Script
@@ -354,6 +382,7 @@ local Trinket2TitleFont = TrinketSettingsFrame:CreateFontString("Trinket2TitleFo
 Trinket2TitleFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 43, -195)
 Trinket2TitleFont:SetFont("Fonts\\FRIZQT__.TTF", 20)
 Trinket2TitleFont:SetJustifyH("LEFT")
+Trinket2TitleFont:SetTextColor(1, 1, 1)
 Trinket2TitleFont:SetText("Trinket 2:")
 
 -- Title Check Script
@@ -586,6 +615,17 @@ TrinketFrame:SetScript("OnEvent", function(self, event, arg1)
 					Trinket2Cooldown:SetCooldown(GetTime(), Trinket2ICDValue:GetText())
 					Trinket2UpdateFrame:SetScript("OnUpdate", Trinket2Updater)
 				end
+			end
+		end
+	end
+	if DebugModeButton:GetChecked() and event == "UNIT_AURA" and arg1 == "player" then
+		for i=1,40 do
+			if select(1, UnitBuff("player", i)) == nil then
+				DEFAULT_CHAT_FRAME:AddMessage("-----")
+				break
+			else
+				local spellName, _, spellIcon, _, _, _, _, _, _, _, spellID = UnitBuff("player", i)
+				DEFAULT_CHAT_FRAME:AddMessage("- |cff6666ffbuff name:|r "..spellName.." | |cff6666ffbuff ID:|r "..spellID.." | |cff6666fficon name:|r "..string.sub(spellIcon, 17))
 			end
 		end
 	end
