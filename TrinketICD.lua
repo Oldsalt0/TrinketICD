@@ -152,8 +152,20 @@ TrinketSettingsButton:SetScript("OnClick", function()
 end)
 TrinketFrame:SetScript("OnEnter", function() TrinketSettingsButton:Show() end)
 TrinketSettingsButton:SetScript("OnEnter", function() TrinketSettingsButton:Show() end)
-TrinketFrame:SetScript("OnLeave", function() TrinketSettingsButton:Hide() end)
-TrinketSettingsButton:SetScript("OnLeave", function() TrinketSettingsButton:Hide() end)
+TrinketFrame:SetScript("OnLeave", function()
+	if Trinket1TitleButton:GetChecked() or Trinket2TitleButton:GetChecked() then
+		TrinketSettingsButton:Hide()
+	else
+		TrinketSettingsButton:Show()
+	end
+end)
+TrinketSettingsButton:SetScript("OnLeave", function()
+	if Trinket1TitleButton:GetChecked() or Trinket2TitleButton:GetChecked() then
+		TrinketSettingsButton:Hide()
+	else
+		TrinketSettingsButton:Show()
+	end
+end)
 
 -- Settings Frame
 local TrinketSettingsFrame = CreateFrame("Frame", "TrinketSettingsFrame", UIParent)
@@ -177,7 +189,7 @@ TrinketSettingsFrame:Hide()
 -- Debug Mode Check Button
 local DebugModeButton = CreateFrame("CheckButton", "DebugModeButton", TrinketSettingsFrame, "InterfaceOptionsCheckButtonTemplate")
 DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -375)
-DebugModeButton:SetHitRectInsets(0, -80, 0, 0)
+DebugModeButton:SetHitRectInsets(0, -85, 0, 0)
 DebugModeButton:SetScript("OnEnter", function()
 	GameTooltip:SetOwner(DebugModeButton, "ANCHOR_TOPLEFT", 0, -5)
 	GameTooltip:SetText("Prints buffs with their icon name and ID on chat")
@@ -185,7 +197,7 @@ DebugModeButton:SetScript("OnEnter", function()
 	GameTooltip:FadeOut()
 end)
 
--- Heroic Mark Text
+-- Debug Mode Text
 local DebugModeFont = TrinketSettingsFrame:CreateFontString("DebugModeFont", "ARTWORK", "GameFontNormal")
 DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -381)
 DebugModeFont:SetFont("Fonts\\FRIZQT__.TTF", 12)
@@ -231,6 +243,11 @@ TrinketSaveButton:SetScript("OnClick", function()
 	trinket2Table[5] = Trinket2Aura2:GetText()
 	trinket2Table[6] = Trinket2Aura3:GetText()
 	trinket2Table[7] = Trinket2Aura4:GetText()
+	if not Trinket1TitleButton:GetChecked() and not Trinket2TitleButton:GetChecked() then
+		TrinketSettingsButton:Show()
+	else
+		TrinketSettingsButton:Hide()
+	end
 	TrinketSettingsFrame:Hide()
 end)
 
@@ -258,10 +275,68 @@ Trinket1TitleButton:SetScript("OnClick", function()
 		trinket1Table[1] = 1
 		Trinket1Frame:Show()
 		Trinket1FontFrame:Show()
+		for i,value in pairs({Trinket1IconFont, Trinket1IconName, Trinket1ICDFont, Trinket1ICDValue, Trinket1AuraFont, Trinket1Aura1, Trinket1Aura2, Trinket1Aura3, Trinket1Aura4, Trinket1HeroicMarkButton, Trinket1HeroicMarkFont}) do
+			value:Show()
+		end
+		Trinket2TitleButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -190)
+		Trinket2TitleFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 43, -195)
+		Trinket2IconFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -225)
+		Trinket2IconName:SetPoint("TOPLEFT", TrinketSettingsFrame, 60, -230)
+		Trinket2ICDFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -260)
+		Trinket2ICDValue:SetPoint("TOPLEFT", TrinketSettingsFrame, 125, -255)
+		Trinket2AuraFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -292)
+		Trinket2Aura1:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -280)
+		Trinket2Aura2:SetPoint("TOPLEFT", TrinketSettingsFrame, 115, -280)
+		Trinket2Aura3:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -300)
+		Trinket2Aura4:SetPoint("TOPLEFT", TrinketSettingsFrame, 115, -300)
+		Trinket2HeroicMarkButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -325)
+		Trinket2HeroicMarkFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -331)
+		if Trinket2TitleButton:GetChecked() then
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -375)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -381)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -410)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -413)
+			TrinketSettingsFrame:SetHeight(440)
+		else
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -250)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -256)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -285)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -288)
+			TrinketSettingsFrame:SetHeight(315)
+		end
 	else
 		trinket1Table[1] = 0
 		Trinket1Frame:Hide()
 		Trinket1FontFrame:Hide()
+		for i,value in pairs({Trinket1IconFont, Trinket1IconName, Trinket1ICDFont, Trinket1ICDValue, Trinket1AuraFont, Trinket1Aura1, Trinket1Aura2, Trinket1Aura3, Trinket1Aura4, Trinket1HeroicMarkButton, Trinket1HeroicMarkFont}) do
+			value:Hide()
+		end
+		Trinket2TitleButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -65)
+		Trinket2TitleFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 43, -70)
+		Trinket2IconFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -100)
+		Trinket2IconName:SetPoint("TOPLEFT", TrinketSettingsFrame, 60, -105)
+		Trinket2ICDFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -135)
+		Trinket2ICDValue:SetPoint("TOPLEFT", TrinketSettingsFrame, 125, -130)
+		Trinket2AuraFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -167)
+		Trinket2Aura1:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -155)
+		Trinket2Aura2:SetPoint("TOPLEFT", TrinketSettingsFrame, 115, -155)
+		Trinket2Aura3:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -175)
+		Trinket2Aura4:SetPoint("TOPLEFT", TrinketSettingsFrame, 115, -175)
+		Trinket2HeroicMarkButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -200)
+		Trinket2HeroicMarkFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -206)
+		if Trinket2TitleButton:GetChecked() then
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -250)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -256)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -285)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -288)
+			TrinketSettingsFrame:SetHeight(315)
+		else
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -120)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -126)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -155)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -158)
+			TrinketSettingsFrame:SetHeight(185)
+		end
 	end
 end)
 
@@ -393,12 +468,44 @@ Trinket2TitleButton:SetScript("OnClick", function()
 		Trinket2FontFrame:Show()
 		TrinketFrame:SetWidth(77)
 		TrinketSettingsButton:SetPoint("TOPLEFT", TrinketFrame, 60, -13)
+		for i,value in pairs({Trinket2IconFont, Trinket2IconName, Trinket2ICDFont, Trinket2ICDValue, Trinket2AuraFont, Trinket2Aura1, Trinket2Aura2, Trinket2Aura3, Trinket2Aura4, Trinket2HeroicMarkButton, Trinket2HeroicMarkFont}) do
+			value:Show()
+		end
+		if Trinket1TitleButton:GetChecked() then
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -375)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -381)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -410)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -413)
+			TrinketSettingsFrame:SetHeight(440)
+		else
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -250)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -256)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -285)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -288)
+			TrinketSettingsFrame:SetHeight(315)
+		end
 	else
 		trinket2Table[1] = 0
 		Trinket2Frame:Hide()
 		Trinket2FontFrame:Hide()
 		TrinketSettingsButton:SetPoint("TOPLEFT", TrinketFrame, 30, -13)
 		TrinketFrame:SetWidth(47)
+		for i,value in pairs({Trinket2IconFont, Trinket2IconName, Trinket2ICDFont, Trinket2ICDValue, Trinket2AuraFont, Trinket2Aura1, Trinket2Aura2, Trinket2Aura3, Trinket2Aura4, Trinket2HeroicMarkButton, Trinket2HeroicMarkFont}) do
+			value:Hide()
+		end
+		if Trinket1TitleButton:GetChecked() then
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -250)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -256)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -285)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -288)
+			TrinketSettingsFrame:SetHeight(315)
+		else
+			DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -120)
+			DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -126)
+			TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -155)
+			TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -158)
+			TrinketSettingsFrame:SetHeight(185)
+		end
 	end
 end)
 
@@ -526,6 +633,27 @@ TrinketFrame:SetScript("OnEvent", function(self, event, arg1)
 			else
 				Trinket1Frame:Hide()
 				Trinket1FontFrame:Hide()
+				for i,value in pairs({Trinket1IconFont, Trinket1IconName, Trinket1ICDFont, Trinket1ICDValue, Trinket1AuraFont, Trinket1Aura1, Trinket1Aura2, Trinket1Aura3, Trinket1Aura4, Trinket1HeroicMarkButton, Trinket1HeroicMarkFont}) do
+					value:Hide()
+				end
+				Trinket2TitleButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -65)
+				Trinket2TitleFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 43, -70)
+				Trinket2IconFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -100)
+				Trinket2IconName:SetPoint("TOPLEFT", TrinketSettingsFrame, 60, -105)
+				Trinket2ICDFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -135)
+				Trinket2ICDValue:SetPoint("TOPLEFT", TrinketSettingsFrame, 125, -130)
+				Trinket2AuraFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -167)
+				Trinket2Aura1:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -155)
+				Trinket2Aura2:SetPoint("TOPLEFT", TrinketSettingsFrame, 115, -155)
+				Trinket2Aura3:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -175)
+				Trinket2Aura4:SetPoint("TOPLEFT", TrinketSettingsFrame, 115, -175)
+				Trinket2HeroicMarkButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -200)
+				Trinket2HeroicMarkFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -206)
+				DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -250)
+				DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -256)
+				TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -285)
+				TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -288)
+				TrinketSettingsFrame:SetHeight(315)
 			end
 			if trinket1Table[2] then
 				Trinket1IconName:SetText(trinket1Table[2])
@@ -563,6 +691,22 @@ TrinketFrame:SetScript("OnEvent", function(self, event, arg1)
 				Trinket2FontFrame:Hide()
 				TrinketSettingsButton:SetPoint("TOPLEFT", TrinketFrame, 30, -13)
 				TrinketFrame:SetWidth(47)
+				for i,value in pairs({Trinket2IconFont, Trinket2IconName, Trinket2ICDFont, Trinket2ICDValue, Trinket2AuraFont, Trinket2Aura1, Trinket2Aura2, Trinket2Aura3, Trinket2Aura4, Trinket2HeroicMarkButton, Trinket2HeroicMarkFont}) do
+					value:Hide()
+				end
+				if Trinket1TitleButton:GetChecked() then
+					DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -250)
+					DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -256)
+					TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -285)
+					TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -288)
+					TrinketSettingsFrame:SetHeight(315)
+				else
+					DebugModeButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 10, -120)
+					DebugModeFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 37, -126)
+					TrinketSaveButton:SetPoint("TOPLEFT", TrinketSettingsFrame, 65, -155)
+					TrinketSaveFont:SetPoint("TOPLEFT", TrinketSettingsFrame, 68, -158)
+					TrinketSettingsFrame:SetHeight(185)
+				end
 			end
 			if trinket2Table[2] then
 				Trinket2IconName:SetText(trinket2Table[2])
