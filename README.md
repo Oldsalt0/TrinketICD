@@ -1,7 +1,7 @@
 # TrinketICD
 <p align="left">
   <img src="http://i.imgur.com/WEZraYX.png" width="150"/>
-  <img src="http://i.imgur.com/uVB8wfV.png" width="200"/>
+  <img src="http://i.imgur.com/lak1el8.png" width="195"/>
   <img src="http://i.imgur.com/vjdNdT4.png" width="335"/>
   <img src="http://i.imgur.com/0X2b3ZP.png" width="150"/>
 </p>
